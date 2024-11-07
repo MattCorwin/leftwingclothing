@@ -17,7 +17,7 @@ export default $config({
     const domainRoot = 'something.com';
     const customDomain =
       $app.stage === 'prod' ? domainRoot : `${$app.stage}.${domainRoot}`;
-    const table = new sst.aws.Dynamo('freshandcleanTable', {
+    const table = new sst.aws.Dynamo('crm', {
       fields: {
         pk: 'string',
         sk: 'string',
