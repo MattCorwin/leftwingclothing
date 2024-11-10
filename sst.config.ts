@@ -1,9 +1,10 @@
 /// <reference path="./.sst/platform/config.d.ts" />
+const service = 'template';
 
 export default $config({
   app(input) {
     return {
-      name: 'crm',
+      name: service,
       removal: input?.stage === 'production' ? 'retain' : 'remove',
       home: 'aws',
       providers: {
@@ -14,18 +15,18 @@ export default $config({
     };
   },
   async run() {
-    const domainRoot = 'something.com';
-    const customDomain =
-      $app.stage === 'prod' ? domainRoot : `${$app.stage}.${domainRoot}`;
-    const table = new sst.aws.Dynamo('crm', {
+    // const domainRoot = 'something.com';
+    // const customDomain =
+    //   $app.stage === 'prod' ? domainRoot : `${$app.stage}.${domainRoot}`;
+    const table = new sst.aws.Dynamo(service, {
       fields: {
         pk: 'string',
         sk: 'string',
       },
       primaryIndex: { hashKey: 'pk', rangeKey: 'sk' },
     });
-    new sst.aws.Nextjs('crm', {
-      domain: customDomain,
+    new sst.aws.Nextjs(service, {
+     // domain: customDomain,
       link: [table],
       permissions: [
         {
