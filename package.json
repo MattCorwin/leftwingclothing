@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "sst deploy"
   },
   "dependencies": {
     "dynamodb-toolbox": "^1.12.2",
