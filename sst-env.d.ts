@@ -10,9 +10,5 @@ declare module "sst" {
       "type": "sst.aws.Nextjs"
       "url": string
     }
-    "left-wing-clothing-table": {
-      "name": string
-      "type": "sst.aws.Dynamo"
-    }
   }
 }
