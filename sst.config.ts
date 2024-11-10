@@ -1,5 +1,6 @@
 /// <reference path="./.sst/platform/config.d.ts" />
-const service = 'template';
+const service = 'left-wing-clothing';
+const domainRoot = 'left-wing-clothing.com';
 
 export default $config({
   app(input) {
@@ -15,10 +16,9 @@ export default $config({
     };
   },
   async run() {
-    // const domainRoot = 'something.com';
-    // const customDomain =
-    //   $app.stage === 'prod' ? domainRoot : `${$app.stage}.${domainRoot}`;
-    const table = new sst.aws.Dynamo(service, {
+    const customDomain =
+      $app.stage === 'prod' ? domainRoot : `${$app.stage}.${domainRoot}`;
+    const table = new sst.aws.Dynamo(`${service}-table`, {
       fields: {
         pk: 'string',
         sk: 'string',
@@ -26,7 +26,7 @@ export default $config({
       primaryIndex: { hashKey: 'pk', rangeKey: 'sk' },
     });
     new sst.aws.Nextjs(service, {
-     // domain: customDomain,
+     domain: customDomain,
       link: [table],
       permissions: [
         {
